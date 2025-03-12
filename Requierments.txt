@@ -1,0 +1,3 @@
+OMNet  v6.0.3
+INet   v4.4.1
+Simu5G v1.2.1
