@@ -1,0 +1,3 @@
+package multimechost;
+
+@license(LGPL);
