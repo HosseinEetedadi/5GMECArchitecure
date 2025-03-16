@@ -27,11 +27,12 @@ import simu5g.nodes.mec.MECHost;
 import simu5g.nodes.mec.MECOrchestrator.MecOrchestrator;
 import simu5g.nodes.mec.UALCMP.UALCMP;
 import inet.visualizer.contract.IIntegratedVisualizer;
+import inet.node.inet.Router;
 
 network singleMecHost
 {
     parameters:
-        @display("i=block/network2;bgb=911.62396,506.912;bgi=background/pisa");
+        @display("i=block/network2;bgb=1334.9751,953.075;bgi=background/pisa");
         int numUes = default(0);
         double playgroundSizeX @unit(m);
         double playgroundSizeY @unit(m);
@@ -40,31 +41,31 @@ network singleMecHost
     submodules:
 
         routingRecorder: RoutingTableRecorder {
-            @display("p=843.14996,189.06999");
+            @display("p=1242.7887,386.00623;is=s");
         }
         configurator: Ipv4NetworkConfigurator {
-            @display("p=843.14996,268.78598");
+            @display("p=1242.7887,287.6125;is=s");
         }
         channelControl: LteChannelControl {
-            @display("p=843.14996,109.354");
+            @display("p=1241.2749,121.1;is=vs");
         }
         binder: Binder {
-            @display("p=843.14996,349.524");
+            @display("p=1242.7887,205.87;is=s");
         }
         carrierAggregation: CarrierAggregation {
-            @display("p=844.172,426.17398");
+            @display("p=1235.22,37.84375;is=s");
         }
 
         upf: Upf {
-            @display("p=545.0638,249.77875");
+            @display("p=953.17194,687.126");
         }
 
         iUpf: Upf {
-            @display("p=352.92624,249.77875");
+            @display("p=170.346,287.09998");
         }
 
         gnb1: gNodeB {
-            @display("p=140,250;is=vl");
+            @display("p=171.5625,122.38125;is=vl");
         }
 
         ue[numUes]: NRUe {
@@ -72,34 +73,88 @@ network singleMecHost
         }
 
         mecHost1: MECHost {
-            @display("p=352.92624,145.62;is=l");
+            @display("p=266.046,250.734;is=s");
+            @display("i=device/server");
         }
+        router1: Router {
+            @display("p=170.346,694.782");
+        }
+        router2: Router {
 
+            @display("p=352.176,606.738");
+        }
+        router3: Router {
+            @display("p=352.176,765.6");
+        }
+        router4: Router {
+            @display("p=495.72598,606.738");
+        }
+        router5: Router {
+
+            @display("p=495.72598,765.6");
+        }
+        router6: Router {
+            @display("p=650.75995,606.738");
+        }
+        router7: Router {
+            @display("p=660.32996,765.6");
+        }
+        router8: Router {
+            @display("p=725.40594,681.384");
+        }
         mecHost2: MECHost {
-            @display("p=352.59,341.348;is=l");
+            @display("p=264.132,321.55197;is=s");
+            @display("i=device/server");
         }
 
         mecOrchestrator: MecOrchestrator {
-            @display("p=544.0525,63.70875;is=l");
+            @display("p=951.25793,430.65;is=l");
         }
 
         ualcmp: UALCMP {
-            @display("p=545.0638,158.76625;i=device/smallrouter");
+            @display("p=953.17194,566.54395;i=device/smallrouter");
         }
 
         // 🔹 New: Adding Core Servers
         coreServer1: MECHost {
-            @display("p=638.75,210.532;is=s");
+            @display("p=1117.776,648.84595;is=l");
+
         }
 
         coreServer2: MECHost {
-            @display("p=638.75,281.05;is=s");
+            @display("p=1117.776,780.912;is=l");
+        }
+        coreServer3: MECHost {
+            @display("p=1270.896,648.84595;is=l");
+
         }
 
+        coreServer4: MECHost {
+            @display("p=1270.896,780.912;is=l");
+        }
     connections allowunconnected:
 
-        upf.pppg++ <--> Eth10G <--> iUpf.pppg++;
         iUpf.pppg++ <--> Eth10G <--> gnb1.ppp;
+        iUpf.pppg++ <--> Eth10G <--> router1.pppg++;
+
+
+
+        router1.pppg++ <--> Eth10G <--> router2.pppg++;
+        router1.pppg++ <--> Eth10G <--> router3.pppg++;
+        router2.pppg++ <--> Eth10G <--> router3.pppg++;
+        router2.pppg++ <--> Eth10G <--> router4.pppg++;
+        router3.pppg++ <--> Eth10G <--> router5.pppg++;
+        router4.pppg++ <--> Eth10G <--> router5.pppg++;
+        router4.pppg++ <--> Eth10G <--> router6.pppg++;
+        router4.pppg++ <--> Eth10G <--> router7.pppg++;
+        router5.pppg++ <--> Eth10G <--> router6.pppg++;
+        router5.pppg++ <--> Eth10G <--> router7.pppg++;
+        router6.pppg++ <--> Eth10G <--> router8.pppg++;
+        router7.pppg++ <--> Eth10G <--> router8.pppg++;
+
+
+        upf.pppg++ <--> Eth10G <--> router8.pppg++;
+
         ualcmp.ppp++ <--> Eth10G <--> upf.filterGate;
 
         ualcmp.toMecOrchestrator --> mecOrchestrator.fromUALCMP;
@@ -111,8 +166,8 @@ network singleMecHost
         //  New: Connecting Core Servers
         upf.pppg++ <--> Eth10G <--> coreServer1.ppp++;
         upf.pppg++ <--> Eth10G <--> coreServer2.ppp++;
+        upf.pppg++ <--> Eth10G <--> coreServer3.ppp++;
+        upf.pppg++ <--> Eth10G <--> coreServer4.ppp++;
+
 }
-
-
-
 
