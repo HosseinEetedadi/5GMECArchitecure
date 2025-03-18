@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for MultiMecHost
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -KINET_PROJ=/home/opp_env/default_workspace/inet-4.4.1 -KSIMU5G_PROJ=/home/opp_env/default_workspace/simu5g-1.2.1 -DINET_IMPORT -L$$\(INET_PROJ\)/src -L$$\(SIMU5G_PROJ\)/src -lINET$$\(D\) -lsimu5g$$\(D\)
+#  opp_makemake -f --deep -KINET_PROJ=/home/opp_env/default_workspace/inet-4.4.1 -KSIMU5G_PROJ=/home/opp_env/default_workspace/simu5g-1.2.1 -DINET_IMPORT -I$$\(INET_PROJ\)/src -I$$\(SIMU5G_PROJ\)/src -L$$\(INET_PROJ\)/src -L$$\(SIMU5G_PROJ\)/src -lINET$$\(D\) -lsimu5g$$\(D\)
 #
 
 # Name of target to be created (-o option)
@@ -19,7 +19,7 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(QTENV_LIBS) $(CMDENV_LIBS)
 #USERIF_LIBS = $(QTENV_LIBS)
 
 # C++ include paths (with -I)
-INCLUDE_PATH =
+INCLUDE_PATH = -I$(INET_PROJ)/src -I$(SIMU5G_PROJ)/src
 
 # Additional object and library files to link with
 EXTRA_OBJS =
@@ -33,7 +33,7 @@ PROJECTRELATIVE_PATH = src
 O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 
 # Object files for local .cc, .msg and .sm files
-OBJS =
+OBJS = $O/DynamicRouter.o $O/LinkMonitor.o
 
 # Message files
 MSGFILES =
