@@ -51,9 +51,9 @@ network singleMecHost
    	@networkNode(true);  // ✅ Add this line
     submodules:
 
-        routingRecorder: RoutingTableRecorder {
-            @display("p=1242.7887,386.00623;is=s");
-        }
+//        routingRecorder: RoutingTableRecorder {
+//            @display("p=1242.7887,386.00623;is=s");
+//        }
         configurator: Ipv4NetworkConfigurator {
             @display("p=1242.7887,287.6125;is=s");
         }
@@ -66,15 +66,15 @@ network singleMecHost
         carrierAggregation: CarrierAggregation {
             @display("p=1235.22,37.84375;is=s");
         }
-        routingTable: Ipv4RoutingTable {
-            parameters:
-        	interfaceTableModule = default("^.interfaceTable");
-        	@display("p=1234.5299,482.32797;is=s");
-        	 
-        }
-        interfaceTable: InterfaceTable {
-            @display("p=1234.5299,581.85596;is=s");
-        }
+//        routingTable: Ipv4RoutingTable {
+//            parameters:
+//        	interfaceTableModule = default("^.interfaceTable");
+//        	@display("p=1234.5299,482.32797;is=s");
+//        	 
+//        }
+//        interfaceTable: InterfaceTable {
+//            @display("p=1234.5299,581.85596;is=s");
+//        }
         upf: Upf {
             @display("p=953.17194,687.126");
         }
@@ -151,14 +151,14 @@ network singleMecHost
         coreServer4: MECHost {
             @display("p=1270.896,780.912;is=l");
         }
-        linkMonitor: LinkMonitor {
-            @display("p=495.72598,400.02597");
-            monitoredLinks = "router1-router2, router1-router3, router2-router4";
-            updateInterval = 2s;
-        }
-        dynamicRouter: DynamicRouter {
-            @display("p=687.126,400.02597");
-        }
+//        linkMonitor: LinkMonitor {
+//            @display("p=495.72598,400.02597");
+//            monitoredLinks = "router1-router2, router1-router3, router2-router4";
+//            updateInterval = 2s;
+//        }
+//        dynamicRouter: DynamicRouter {
+//            @display("p=687.126,400.02597");
+//        }
         
     connections allowunconnected:
 

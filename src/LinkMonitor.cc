@@ -19,7 +19,7 @@
 Define_Module(LinkMonitor);
 
 void LinkMonitor::initialize() {
-    EV << "LinkMonitor is Working now:)";
+    EV << "LinkMonitor is Working now:)"<< endl;
     updateInterval = par("updateInterval");
     updateMsg = new cMessage("update");
     scheduleAt(simTime() + updateInterval, updateMsg);
@@ -45,14 +45,16 @@ void LinkMonitor::checkLinkLoads() {
             for (int i = 0; i < mod->gateSize("pppg"); ++i) {  // ✅ Loop through both directions
                 cGate *gateIn = mod->gate("pppg$i", i);  // ✅ Input gate
                 cGate *gateOut = mod->gate("pppg$o", i); // ✅ Output gate
-
+                std::string gatePath = gateIn-> getFullPath();
                 if (gateIn->isConnected()) {
                     cChannel *channel = gateIn->getChannel();
+
                     if (channel) {
                         double load = channel->getTransmissionFinishTime().dbl();
                         linkLoads[gateIn->getFullPath()] = load;  // ✅ Store correct load
-                        EV <<"The checkLinkLoads in gateIn is working well:)"<< endl;
+                        EV <<"The checkLinkLoads in gateIn is working well:)"<< "This is The gateFullPath: " << gateIn->getFullPath() << endl;
                     }
+
                 }
 
                 if (gateOut->isConnected()) {
@@ -80,5 +82,6 @@ std::string LinkMonitor::selectBestLink() {
             bestLink = entry.first;
         }
     }
+    EV << "The best link is: "<< bestLink<< endl;
     return bestLink;
 }
