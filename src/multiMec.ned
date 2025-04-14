@@ -34,7 +34,8 @@ import inet.networklayer.ipv4.Ipv4RoutingTable;
 import inet.networklayer.common.InterfaceTable;
 import ned.DatarateChannel;
 
-channel Eth1M extends DatarateChannel {
+channel Eth1M extends DatarateChannel
+{
     datarate = 0.001bps;
     delay = 1ms;
 }
@@ -47,13 +48,13 @@ network singleMecHost
         double playgroundSizeX @unit(m);
         double playgroundSizeY @unit(m);
         double playgroundSizeZ @unit(m);
-        
-   	@networkNode(true);  // ✅ Add this line
+
+        @networkNode(true);  // ✅ Add this line
     submodules:
 
-//        routingRecorder: RoutingTableRecorder {
-//            @display("p=1242.7887,386.00623;is=s");
-//        }
+        routingRecorder: RoutingTableRecorder {
+            @display("p=1242.7887,386.00623;is=s");
+        }
         configurator: Ipv4NetworkConfigurator {
             @display("p=1242.7887,287.6125;is=s");
         }
@@ -66,15 +67,15 @@ network singleMecHost
         carrierAggregation: CarrierAggregation {
             @display("p=1235.22,37.84375;is=s");
         }
-//        routingTable: Ipv4RoutingTable {
-//            parameters:
-//        	interfaceTableModule = default("^.interfaceTable");
-//        	@display("p=1234.5299,482.32797;is=s");
-//        	 
-//        }
-//        interfaceTable: InterfaceTable {
-//            @display("p=1234.5299,581.85596;is=s");
-//        }
+        routingTable: Ipv4RoutingTable {
+            parameters:
+                interfaceTableModule = default("^.interfaceTable");
+                @display("p=1033.5599,36.365997;is=s");
+
+        }
+        interfaceTable: InterfaceTable {
+            @display("p=830.67596,36.365997;is=s");
+        }
         upf: Upf {
             @display("p=953.17194,687.126");
         }
@@ -97,6 +98,7 @@ network singleMecHost
         }
         router1: Router {
             @display("p=170.346,694.782");
+
         }
         router2: Router {
 
@@ -134,7 +136,7 @@ network singleMecHost
             @display("p=953.17194,566.54395;i=device/smallrouter");
         }
 
-        // 🔹 New: Adding Core Servers
+        // ð¹ New: Adding Core Serve
         coreServer1: MECHost {
             @display("p=1117.776,648.84595;is=l");
 
@@ -151,15 +153,20 @@ network singleMecHost
         coreServer4: MECHost {
             @display("p=1270.896,780.912;is=l");
         }
-//        linkMonitor: LinkMonitor {
-//            @display("p=495.72598,400.02597");
-//            monitoredLinks = "router1-router2, router1-router3, router2-router4";
-//            updateInterval = 2s;
-//        }
-//        dynamicRouter: DynamicRouter {
-//            @display("p=687.126,400.02597");
-//        }
-        
+
+        smartRouter: SmartRouter {
+            parameters:
+                updateInterval = 2s;  // or any value you want
+                @display("i=block/network;p=786.654,400.02597");
+        }
+        nodePruner: NodePruner {
+
+            @display("p=623.964,400.02597;i=block/process");
+        }
+        taskMigrationManager: TaskMigrationManager {
+            @display("p=514.86597,250.734;i=block/gear");
+        }
+
     connections allowunconnected:
 
         iUpf.pppg++ <--> Eth10G <--> gnb1.ppp;

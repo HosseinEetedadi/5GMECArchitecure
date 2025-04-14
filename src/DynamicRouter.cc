@@ -14,6 +14,13 @@
 // 
 
 #include "DynamicRouter.h"
+#include "inet/networklayer/ipv4/Ipv4Route.h"
+#include "inet/networklayer/common/InterfaceTable.h"
+//#include "inet/networklayer/common/InterfaceEntry.h"
+#include "inet/common/ModuleAccess.h"
+
+using namespace std;
+//using ::InterfaceEntry;  // or just refer to InterfaceEntry directly
 
 Define_Module(DynamicRouter);
 
@@ -39,9 +46,55 @@ void DynamicRouter::handleMessage(cMessage *msg) {
 }
 
 void DynamicRouter::updateRoutes() {
-    std::string bestLink = linkMonitor->selectBestLink();
+
+
+    string bestLink = linkMonitor->selectBestLink();
+
     if (bestLink != "none") {
-        EV << "Updating routing table to use best link: " << bestLink << endl;
-        // Implement routing table update logic here
+           EV << "Updating routing table to use best link: " << bestLink << endl;
+           EV << "The Router name is: "<< bestLink << endl;
+           EV << "routingTable Count = " << routingTable->getNumRoutes() << endl;
+           for(int i =0; i < routingTable->getNumRoutes(); i++){
+               const Ipv4Route *route = routingTable->getRoute(i);
+               EV << "Destination: " << route->getDestination()
+                  << ", NetMask: "<<route->getNetmask()
+                  << ", GW: " << route->getGateway()
+                  << ", Interface: "<< route->getInterface() << endl;
+           }
+          ///// Implement routing table update logic here/////
+
+//           cGate *gate = getSimulation()->getModuleByPath(bestLink.c_str())->gate("$o");
+//           EV << "This is the getModuleByPah: "<< gate << endl;
+
+//
+//           // Get the gate from the bestLink path
+//           cGate *gate = getSimulation()->getModuleByPath(bestLink.c_str())->gate("$o");
+//
+//           EV << "This is the gate: "<<gate << endl;
+//           EV << "This is the getModuleByPah: "<< getSimulation()->getModuleByPath(bestLink.c_str()) << endl;
+//
+//           if (!gate) {
+//               EV << "Best link gate not found: " << bestLink << endl;
+//               return;
+//           }
+//
+//           // Get the parent module (router) and its interface table
+//           cModule *routerMod = gate->getOwnerModule();
+//           inet::IInterfaceTable *ifaceTable = check_and_cast<inet::IInterfaceTable *>(routerMod->getSubmodule("interfaceTable"));
+////           InterfaceEntry *iface = ifaceTable->findInterfaceByNodeOutputGateId(gate->getId());
+//
+////           if (!iface) {
+////               EV << "No interface found for gate: " << bestLink << endl;
+////               return;
+////           }
+//       // Create a default route using this interface
+//              inet::Ipv4Route *route = new inet::Ipv4Route();
+//              route->setDestination(inet::Ipv4Address("0.0.0.0")); // Default route
+//              route->setNetmask(inet::Ipv4Address("0.0.0.0"));
+//              route->setGateway(inet::Ipv4Address::UNSPECIFIED_ADDRESS);
+////              route->setInterface(iface);
+//
+//              routingTable->addRoute(route);
+//              EV << "Dynamic default route installed via: " << bestLink << endl;
     }
 }

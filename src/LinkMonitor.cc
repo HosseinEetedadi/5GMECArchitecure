@@ -37,12 +37,14 @@ void LinkMonitor::handleMessage(cMessage *msg) {
 }
 
 void LinkMonitor::checkLinkLoads() {
-    for (cModule::SubmoduleIterator it(getParentModule()); !it.end(); ++it) {
-        cModule *mod = *it;
+
+    for (cModule::SubmoduleIterator it(getSimulation()->getSystemModule()); !it.end(); ++it) {
+            cModule *mod = *it;
 
         // Check if module is a router
         if (strstr(mod->getName(), "router") != nullptr) {
             for (int i = 0; i < mod->gateSize("pppg"); ++i) {  // ✅ Loop through both directions
+                EV << "The module is: " << mod << endl;
                 cGate *gateIn = mod->gate("pppg$i", i);  // ✅ Input gate
                 cGate *gateOut = mod->gate("pppg$o", i); // ✅ Output gate
                 std::string gatePath = gateIn-> getFullPath();
@@ -52,6 +54,9 @@ void LinkMonitor::checkLinkLoads() {
                     if (channel) {
                         double load = channel->getTransmissionFinishTime().dbl();
                         linkLoads[gateIn->getFullPath()] = load;  // ✅ Store correct load
+                        for(const auto& elem : linkLoads){
+                            EV << "first element = " << elem.first << " Second element: " << elem.second << endl;
+                        }
                         EV <<"The checkLinkLoads in gateIn is working well:)"<< "This is The gateFullPath: " << gateIn->getFullPath() << endl;
                     }
 
@@ -73,6 +78,7 @@ void LinkMonitor::checkLinkLoads() {
 
 
 std::string LinkMonitor::selectBestLink() {
+    //The algorithm for choosing best link
     double minLoad = DBL_MAX;
     std::string bestLink = "none";
     EV <<"The selectBestLink is working well:)"<< endl;
