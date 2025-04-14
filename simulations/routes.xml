@@ -1,7 +1,0 @@
-<routes>
-    <!-- Default: MEC handles small tasks -->
-    <route src="ue[*]" dest="mecHost*" condition="taskSize < 50MB" />
-    
-    <!-- Large tasks go to Core -->
-    <route src="ue[*]" dest="coreServer*" condition="taskSize > 50MB || latency > 50ms" />
-</routes>

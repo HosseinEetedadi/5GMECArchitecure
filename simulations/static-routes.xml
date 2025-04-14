@@ -1,0 +1,58 @@
+<Routing>
+    <!-- iUpf to gnb1 and router1 -->
+    <Route host="iUpf" destination="10.0.0.1" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="iUpf" destination="10.0.0.2" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+
+    <!-- router1 to iUpf, router2, router3 -->
+    <Route host="router1" destination="10.0.0.10" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="router1" destination="10.0.0.20" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="router1" destination="10.0.0.30" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+
+    <!-- router2 to router1, router3, router4 -->
+    <Route host="router2" destination="10.0.0.2"  netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="router2" destination="10.0.0.30" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="router2" destination="10.0.0.40" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+
+    <!-- router3 to router1, router2, router5 -->
+    <Route host="router3" destination="10.0.0.2"  netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="router3" destination="10.0.0.20" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="router3" destination="10.0.0.50" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+
+    <!-- router4 to router2, router5, router6, router7 -->
+    <Route host="router4" destination="10.0.0.40" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="router4" destination="10.0.0.50" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="router4" destination="10.0.0.60" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+    <Route host="router4" destination="10.0.0.70" netmask="255.255.255.255" gateway="-" interface="ppp[3]"/>
+
+    <!-- 🆕 router5 to router3, router4, router6, router7 -->
+    <Route host="router5" destination="10.0.0.30" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="router5" destination="10.0.0.40" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="router5" destination="10.0.0.60" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+    <Route host="router5" destination="10.0.0.70" netmask="255.255.255.255" gateway="-" interface="ppp[3]"/>
+
+    <!-- router6 to router4, router5, router8 -->
+    <Route host="router6" destination="10.0.0.60" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="router6" destination="10.0.0.50" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="router6" destination="10.0.0.80" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+
+    <!-- router7 to router4, router5, router8 -->
+    <Route host="router7" destination="10.0.0.70" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="router7" destination="10.0.0.50" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="router7" destination="10.0.0.80" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+
+    <!-- router8 to router6, router7, upf -->
+    <Route host="router8" destination="10.0.0.60" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="router8" destination="10.0.0.70" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="router8" destination="10.0.0.90" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+
+    <!-- upf to router8 and core servers -->
+    <Route host="upf" destination="10.0.0.80" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="upf" destination="10.0.0.125" netmask="255.255.255.255" gateway="-" interface="ppp[1]"/>
+    <Route host="upf" destination="10.0.0.126" netmask="255.255.255.255" gateway="-" interface="ppp[2]"/>
+    <Route host="upf" destination="10.0.0.127" netmask="255.255.255.255" gateway="-" interface="ppp[3]"/>
+    <Route host="upf" destination="10.0.0.128" netmask="255.255.255.255" gateway="-" interface="ppp[4]"/>
+
+    <!-- ualcmp and mecOrchestrator -->
+    <Route host="ualcmp" destination="10.0.0.31" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+    <Route host="mecOrchestrator" destination="10.0.0.20" netmask="255.255.255.255" gateway="-" interface="ppp[0]"/>
+</Routing>

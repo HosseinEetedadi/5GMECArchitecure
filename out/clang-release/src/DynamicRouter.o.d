@@ -56,7 +56,12 @@
   /home/opp_env/default_workspace/inet-4.4.1/src/inet/queueing/contract/IPacketProcessor.h \
   /home/opp_env/default_workspace/inet-4.4.1/src/inet/queueing/contract/IPassivePacketSink.h \
   /home/opp_env/default_workspace/inet-4.4.1/src/inet/networklayer/ipv4/Ipv4Route.h \
-  LinkMonitor.h
+  LinkMonitor.h \
+  /home/opp_env/default_workspace/inet-4.4.1/src/inet/networklayer/common/InterfaceTable.h \
+  /home/opp_env/default_workspace/inet-4.4.1/src/inet/common/lifecycle/ModuleOperations.h \
+  /home/opp_env/default_workspace/inet-4.4.1/src/inet/common/lifecycle/LifecycleOperation.h \
+  /home/opp_env/default_workspace/inet-4.4.1/src/inet/common/lifecycle/OperationalBase.h \
+  /home/opp_env/default_workspace/inet-4.4.1/src/inet/common/lifecycle/OperationalMixin.h
 
 DynamicRouter.h:
 
@@ -173,3 +178,13 @@ DynamicRouter.h:
 /home/opp_env/default_workspace/inet-4.4.1/src/inet/networklayer/ipv4/Ipv4Route.h:
 
 LinkMonitor.h:
+
+/home/opp_env/default_workspace/inet-4.4.1/src/inet/networklayer/common/InterfaceTable.h:
+
+/home/opp_env/default_workspace/inet-4.4.1/src/inet/common/lifecycle/ModuleOperations.h:
+
+/home/opp_env/default_workspace/inet-4.4.1/src/inet/common/lifecycle/LifecycleOperation.h:
+
+/home/opp_env/default_workspace/inet-4.4.1/src/inet/common/lifecycle/OperationalBase.h:
+
+/home/opp_env/default_workspace/inet-4.4.1/src/inet/common/lifecycle/OperationalMixin.h:
