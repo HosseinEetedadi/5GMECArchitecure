@@ -1,0 +1,13 @@
+{
+  "appDid" : "HEAVYAPP",
+  "appName" : "MECHeavyProcessingApp",
+  "appProvider" : "simu5g.apps.mec.HeavyApp.MECHeavyProcessingApp",
+  "appInfoName" : "HeavyVideoProcessor",
+  "appDescription" : "Processes large video streams continuously",
+  "virtualComputeDescriptor" :{
+      "virtualDisk": 200,
+      "virtualCpu" : 4000,
+      "virtualMemory": 500
+  },
+  "omnetppServiceRequired": "HeavyAppService"
+}

@@ -14,9 +14,8 @@
 // 
 
 package multimechost;
-
 simple TaskMigrationManager {
     parameters:
-        @display("i=block/gear");
+        int threshold = default(3); // migrate after this many packets
+        @display("i=block/refresh");
 }
-

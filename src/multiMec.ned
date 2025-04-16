@@ -164,8 +164,11 @@ network singleMecHost
             @display("p=623.964,400.02597;i=block/process");
         }
         taskMigrationManager: TaskMigrationManager {
-            @display("p=514.86597,250.734;i=block/gear");
+            parameters:
+                threshold = 3;
+                @display("p=524.436,218.19598");
         }
+
 
     connections allowunconnected:
 
